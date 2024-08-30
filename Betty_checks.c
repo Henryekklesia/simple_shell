@@ -1,8 +1,10 @@
 #include <stdio.h>
 
 /**
- * Description - Simple Code that pass betty checks
- * main - main function
+ * main - Entry point of the program
+ *
+ * Description: Print a string to the standard output
+ *
  * Return: Always (0) sucess
  */
 
