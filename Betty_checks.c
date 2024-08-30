@@ -8,7 +8,7 @@
 
 int main(void)
 {
-	printf("Betty will be happy!");
+	printf("Betty will be happy!\n");
 
 	return (0);
 }
