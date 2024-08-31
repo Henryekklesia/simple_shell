@@ -1,11 +1,16 @@
 #include <stdio.h>
+
 /**
- * main - dimple shell code
- * Return: 0
+ * main - Entry point of the program
+ *
+ * Description: Print a string to the standard output
+ *
+ * Return: Always (0) sucess
  */
 
 int main(void)
 {
-	printf("simple shell is giving me something\n");
+	printf("Betty will be happy!\n");
+
 	return (0);
 }
