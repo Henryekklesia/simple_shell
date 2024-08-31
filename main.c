@@ -4,7 +4,6 @@
  * main - Entry point of the shell program.
  * Return: 0 on success, otherwise failure.
  */
-
 int main(void)
 {
 	char *command;
@@ -30,9 +29,9 @@ int main(void)
 /**
  * prompt - Displays the shell prompt.
  */
-
 void prompt(void)
 {
 	write(STDOUT_FILENO, "#cisfun$ ", 9);
 	fflush(stdout);
 }
+
