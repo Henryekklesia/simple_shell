@@ -1,39 +1,60 @@
-<<<<<<< HEAD
-=======
 #include "main.h"
 
-int main(int argc, char **argv)
+int main(void)
 {
-    char *command = NULL;
-    size_t bufsize = 0;
-    ssize_t nread;
+	char *command = NULL;
+	size_t bufsize = 0;
+	ssize_t nread;
+	char *args[100];
+	pid_t pid;
+	int i;
 
-    (void)argc; /* Ignore unused argument */
+	while (1)
+	{
+		printf("simple_shell> ");
+		nread = getline(&command, &bufsize, stdin);
 
-    while (1)
-    {
-        display_prompt(); /* Display the shell prompt */
-        
-        /* Read the command from the user */
-        nread = getline(&command, &bufsize, stdin);
-        if (nread == -1) /* Handle Ctrl+D (EOF) */
-        {
-            if (feof(stdin))
-                break;
-            perror("getline");
-            continue;
-        }
+		if (nread == -1)
+		{
+			printf("\n");
+			break;
+		}
 
-        /* Remove newline character */
-        if (command[nread - 1] == '\n')
-            command[nread - 1] = '\0';
+		command[strcspn(command, "\n")] = '\0';
 
-        /* Execute the command */
-        execute_command(argv[0], command);
-    }
+		if (command[0] == '\0')
+		{
+			continue;
+		}
 
-    free(command); /* Free allocated memory */
-    return (0);
+		i = 0;
+		args[i] = strtok(command, " ");
+		while (args[i] != NULL)
+		{
+			i++;
+			args[i] = strtok(NULL, " ");
+		}
+		pid = fork();
+
+		if (pid == -1)
+		{
+			perror("Error");
+		}
+		else if (pid == 0)
+		{
+			if (execve(args[0], args, NULL) == -1)
+			{
+				perror("Error");
+			}
+			exit(EXIT_FAILURE);
+		}
+		else
+		{
+			wait(NULL);
+		}
+	}
+
+	free(command);
+	return (0);
 }
->>>>>>> 8ee87381f62eb1dd4bc8831dc4202ed3e7847b07
 
